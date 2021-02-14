@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-      <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+      <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
       <head> 
             <title> Data Visualization _ CIS569 </title> 
             <meta charset="utf-8"> 
@@ -9,18 +9,12 @@
       <body> 
             <h2>Data Visualization _ CIS569</h2>
             
-            <div class="split left">
-                  <div class="centered">
-                        <h2>Jane Flex</h2>
-                        <p>Some text.</p>
-                  </div>
+            <div class="split left" style="height:100%">
+                  <svg id='list'></svg>
             </div>
                 
             <div class="split right">
-                  <div class="centered">
-                        <h2>John Doe</h2>
-                        <p>Some text here too.</p>
-                  </div>
+                  <svg id='detail'></svg>
             </div>
 
             <svg_test></svg_test> 
@@ -33,4 +27,161 @@
 
       </body> 
 </html>
-<script src = 'd3_function.js'> </script> 
+
+<script>
+      let fileNames = null;
+      main();
+
+      function main(){
+            fileNames = getFileNames();
+
+            //  initialize the view box for the list
+            let vbStr = "0 0 100 " + fileNames.length.toString();
+            let list = d3.select('#list');
+            list.style('width','70vw')
+                  .style('height',fileNames.length * 12)
+                  .attr('viewBox', vbStr)
+            
+            let detail = d3.select('#detail');
+            detail.style('width','70vw')
+                  .style('height',fileNames.length * 12)
+                  .attr('viewBox', vbStr)
+            
+            // draw the list
+            drawList();
+      }
+
+      function drawList(){
+            let list = d3.select('#list');
+
+            // remove all the text elements present
+            list.selectAll('text').remove();
+
+            // add text elements based on current file name list
+            list.selectAll('text')
+                  .data(fileNames)
+                  .enter()
+                  .append('text')
+                  .text(function(d){return d;})
+                  .attr('x',function (){
+                        return 1
+                  })
+                  .attr('y',function (d,i){
+                        return i;
+                  })
+                  .style('font-size','.9pt')
+                  .on('mouseenter', function (mouseData, d) {
+                        try {
+                        d3.select(this)
+                              .style('background-color', 'rgb(247, 244, 241)')
+                              .style('border', 'solid 1px black');
+                        } catch {}
+                        })
+                  .on('mouseleave', function (mouseData, d) {
+                        try {
+                        d3.select(this)
+                              .style('background-color', 'rgba(0,0,0,0)')
+                              .style('border', 'solid 0px black');
+                        } catch {}
+                        })
+                  .call(d3.drag()
+                        .on("start", dragstarted)
+                        .on("drag", dragged)
+                        .on("end", dragended)
+                  )
+      }
+
+      function dragstarted(d) {
+            d3.select(this)
+            .attr('fill', "red")
+      }
+
+      function dragged(d,i) {
+            console.log(d3.event.x);
+
+            // if in list box
+            if(d3.event.x < 20){
+                  // adjust x and y of object being dragged
+                  d3.select(this)
+                        .attr('x',d3.event.x)
+                        .attr('y',d3.event.y)
+            }
+            // then add '+' to detail pane
+            else{
+                  let detail = d3.select('#detail');
+                  detail.selectAll('text').remove();
+                  detail.append('text')
+                        .text("+ " + fileNames[i])
+                        .attr('x',d3.event.x - 20)
+                        .attr('y',d3.event.y)
+                        .attr('fill','red')
+                        .style('font-size','2pt')
+            }
+      }
+
+      function dragended(d, i) {
+            let selectedFile  = fileNames[i];
+            console.log(selectedFile);
+
+            // decide if we are re-ordering list or displaying file
+            // based on how far right the object is dragged
+            if(d3.event.x < 20){
+                  // get the new index from the event's 'y'
+                  let newY = Math.ceil(d3.event.y);
+                  if(newY < 0){newy = 0};
+                  if(newY > fileNames.length -1 ){newY = fileNames.length -1};
+                  
+                  // remove i from fileNames array
+                  fileNames.splice(i,1);
+
+                  // splice filenames array in correct order
+                  fileNames.splice(newY,0,selectedFile);
+            }
+            else{
+                  // get the text of the file to display
+                  d3.text(selectedFile,function(error,data)
+                        {
+                              if(error){
+                                    return console.error(error);
+                              }
+                              console.log(data);
+                              let detail = d3.select('#detail');
+                              detail.selectAll('text').remove();
+                              detail.selectAll('foreignObject').remove();
+                              detail.append("foreignObject")
+                                    .attr("width", "90%")
+                                    .attr("height", "90%")
+                                    .append("xhtml:body")
+                                    .style("font", "2px 'Helvetica Neue'")
+                                    .html("<div>"+ data + "</div>")
+                        });
+            }
+            // redraw the list
+            drawList();
+      }
+
+      function getFileNames(){
+            var filenames = [
+                  'dataset/CIA_01','dataset/CIA_02','dataset/CIA_03','dataset/CIA_04','dataset/CIA_05','dataset/CIA_06',
+                  'dataset/CIA_07','dataset/CIA_08','dataset/CIA_09','dataset/CIA_10','dataset/CIA_11','dataset/CIA_12',
+                  'dataset/CIA_13','dataset/CIA_14','dataset/CIA_15','dataset/CIA_16','dataset/CIA_17','dataset/CIA_18',
+                  'dataset/CIA_19','dataset/CIA_20','dataset/CIA_21','dataset/CIA_22','dataset/CIA_23','dataset/CIA_24',
+                  'dataset/CIA_25','dataset/CIA_26','dataset/CIA_27','dataset/CIA_28','dataset/CIA_29','dataset/CIA_30',
+                  'dataset/CIA_31','dataset/CIA_32','dataset/CIA_33','dataset/CIA_34','dataset/CIA_35','dataset/CIA_36',
+                  'dataset/CIA_37','dataset/CIA_38','dataset/CIA_39','dataset/CIA_40','dataset/DIA_01','dataset/DIA_02',
+                  'dataset/DIA_03','dataset/CIA_docs.txt','dataset/DIA_01','dataset/FBI_01','dataset/FBI_02','dataset/FBI_03',
+                  'dataset/FBI_04','dataset/FBI_05','dataset/FBI_06','dataset/FBI_07','dataset/FBI_08','dataset/FBI_09',
+                  'dataset/FBI_10','dataset/FBI_11','dataset/FBI_12','dataset/FBI_13','dataset/FBI_14','dataset/FBI_15',
+                  'dataset/FBI_16','dataset/FBI_17','dataset/FBI_18','dataset/FBI_19','dataset/FBI_20','dataset/FBI_21',
+                  'dataset/FBI_22','dataset/FBI_23','dataset/FBI_24','dataset/FBI_25','dataset/FBI_26','dataset/FBI_27',
+                  'dataset/FBI_28','dataset/FBI_29','dataset/FBI_30','dataset/FBI_31','dataset/FBI_32','dataset/FBI_33',
+                  'dataset/FBI_34','dataset/FBI_35','dataset/FBI_36','dataset/FBI_37','dataset/FBI_38','dataset/FBI_39',
+                  'dataset/FBI_40','dataset/FBI_41','dataset/FBI_docs.txt','dataset/NSA_01','dataset/NSA_02','dataset/NSA_03',
+                  'dataset/NSA_04','dataset/NSA_05','dataset/NSA_06','dataset/NSA_07','dataset/NSA_08','dataset/NSA_09',
+                  'dataset/NSA_10','dataset/NSA_11','dataset/NSA_12','dataset/NSA_13','dataset/NSA_14','dataset/NSA_15',
+                  'dataset/NSA_16','dataset/NSA_17','dataset/NSA_18','dataset/NSA_19','dataset/NSA_20','dataset/NSA_21',
+                  'dataset/NSA_22','dataset/NSA_docs.txt','dataset/USCBP_01','dataset/USCBP_02','dataset/USCBP_docs.txt'
+                  ];
+            return filenames;
+      }
+</script>
