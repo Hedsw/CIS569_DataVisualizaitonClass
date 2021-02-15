@@ -18,7 +18,7 @@
                   <svg id='detail'></svg>
             </div>
 
-            <h3>Print all of File Name</h3>
+            <h3>File Name  &emsp; &emsp; &emsp;&emsp;&emsp; &emsp;&emsp; Contents</h3>
            
       </body> 
 </html>
@@ -65,7 +65,7 @@
                   .attr('y',function (d,i){
                         return i;
                   })
-                  .style('font-size','.9px')
+                  .style('font-size','1.3px')
                   .on('mouseenter', function (mouseData, d) {
                         try {
                         d3.select(this)
@@ -96,7 +96,7 @@
             console.log(d3.event.x);
 
             // if in list box
-            if(d3.event.x < 20){
+            if(d3.event.x < 10){
                   // adjust x and y of object being dragged
                   d3.select(this)
                         .attr('x',d3.event.x)
@@ -111,7 +111,7 @@
                         .attr('x',d3.event.x - 20)
                         .attr('y',d3.event.y)
                         .attr('fill','red')
-                        .style('font-size','2pt')
+                        .style('font-size','20pt')
             }
       }
 
