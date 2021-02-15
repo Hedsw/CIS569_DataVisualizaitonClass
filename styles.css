@@ -1,23 +1,23 @@
 .split {
-  height: 100%;
+  height: 80%;
   position: absolute;
-  z-index: 1;
   top: 0;
   overflow-x: hidden;
   padding-top: 20px;
 }
 
-
 /* Control the left side */
 .left {
-  left: 0;
+  top: 10%;
+  left: 20;
   width: 15%;
-  background-color: rgb(38, 150, 184);
+  background-color: rgb(229, 232, 233);
 }
 
 /* Control the right side */
 .right {
+  top: 10%;
   right: 0;
-  width: 85%;
-  background-color: rgb(75, 24, 95);
+  width:85%;
+  background-color: rgb(255, 255, 255);
 }

@@ -8,8 +8,9 @@
       </head> 
       <body> 
             <h2>Data Visualization _ CIS569</h2>
-            
-            <div class="split left" style="height:100%">
+                  
+            </div>
+            <div class="split left">
                   <svg id='list'></svg>
             </div>
                 
@@ -23,8 +24,6 @@
             <div id='filename_id'>  </div>
             <h3>Print all of Contents</h3>
            
-
-
       </body> 
 </html>
 
@@ -36,16 +35,16 @@
             fileNames = getFileNames();
 
             //  initialize the view box for the list
-            let vbStr = "0 0 100 " + fileNames.length.toString();
+            let vbStr = "0 10 100 " + fileNames.length.toString();
             let list = d3.select('#list');
             list.style('width','70vw')
-                  .style('height',fileNames.length * 12)
+                  .style('height',fileNames.length * 11)
                   .attr('viewBox', vbStr)
             
             let detail = d3.select('#detail');
             detail.style('width','70vw')
                   .style('height',fileNames.length * 12)
-                  .attr('viewBox', vbStr)
+                  .attr('viewBox', fileNames.length.toString())
             
             // draw the list
             drawList();
@@ -64,12 +63,12 @@
                   .append('text')
                   .text(function(d){return d;})
                   .attr('x',function (){
-                        return 1
+                        return 3
                   })
                   .attr('y',function (d,i){
                         return i;
                   })
-                  .style('font-size','.9pt')
+                  .style('font-size','.9px')
                   .on('mouseenter', function (mouseData, d) {
                         try {
                         d3.select(this)
@@ -107,7 +106,7 @@
                         .attr('y',d3.event.y)
             }
             // then add '+' to detail pane
-            else{
+            else {
                   let detail = d3.select('#detail');
                   detail.selectAll('text').remove();
                   detail.append('text')
@@ -137,11 +136,11 @@
                   // splice filenames array in correct order
                   fileNames.splice(newY,0,selectedFile);
             }
-            else{
+            else {
                   // get the text of the file to display
                   d3.text(selectedFile,function(error,data)
                         {
-                              if(error){
+                              if(error) {
                                     return console.error(error);
                               }
                               console.log(data);
@@ -160,7 +159,7 @@
             drawList();
       }
 
-      function getFileNames(){
+      function getFileNames() {
             var filenames = [
                   'dataset/CIA_01','dataset/CIA_02','dataset/CIA_03','dataset/CIA_04','dataset/CIA_05','dataset/CIA_06',
                   'dataset/CIA_07','dataset/CIA_08','dataset/CIA_09','dataset/CIA_10','dataset/CIA_11','dataset/CIA_12',
