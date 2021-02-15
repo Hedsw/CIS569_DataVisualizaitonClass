@@ -14,15 +14,11 @@
                   <svg id='list'></svg>
             </div>
                 
-            <div class="split right">
+            <div class="split right_top">
                   <svg id='detail'></svg>
             </div>
 
-            <svg_test></svg_test> 
-
-            <h3>Print all of Title</h3>
-            <div id='filename_id'>  </div>
-            <h3>Print all of Contents</h3>
+            <h3>Print all of File Name</h3>
            
       </body> 
 </html>
@@ -31,11 +27,12 @@
       let fileNames = null;
       main();
 
-      function main(){
+      function main() {
             fileNames = getFileNames();
 
             //  initialize the view box for the list
             let vbStr = "0 10 100 " + fileNames.length.toString();
+            let vbStrRight = fileNames.length.toString()
             let list = d3.select('#list');
             list.style('width','70vw')
                   .style('height',fileNames.length * 11)
@@ -43,14 +40,14 @@
             
             let detail = d3.select('#detail');
             detail.style('width','70vw')
-                  .style('height',fileNames.length * 12)
+                  .style('height',fileNames.length * 13)
                   .attr('viewBox', fileNames.length.toString())
             
             // draw the list
             drawList();
       }
 
-      function drawList(){
+      function drawList() {
             let list = d3.select('#list');
 
             // remove all the text elements present
@@ -148,10 +145,10 @@
                               detail.selectAll('text').remove();
                               detail.selectAll('foreignObject').remove();
                               detail.append("foreignObject")
-                                    .attr("width", "90%")
-                                    .attr("height", "90%")
+                                    .attr("width", "100%")
+                                    .attr("height", "100%")
                                     .append("xhtml:body")
-                                    .style("font", "2px 'Helvetica Neue'")
+                                    .style("font", "5px 'Helvetica Neue'")
                                     .html("<div>"+ data + "</div>")
                         });
             }

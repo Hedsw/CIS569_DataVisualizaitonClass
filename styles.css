@@ -11,13 +11,18 @@
   top: 10%;
   left: 20;
   width: 15%;
-  background-color: rgb(229, 232, 233);
+  background-color: rgb(186, 171, 224);
 }
 
 /* Control the right side */
-.right {
+.right_top {
   top: 10%;
   right: 0;
   width:85%;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(123, 192, 171);
+}
+
+.right_down {
+  
+  background-color: rgb(190, 93, 93);
 }
