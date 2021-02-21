@@ -22,4 +22,3 @@ function getFileNames(){
             ];
       return filenames;
 }
-
