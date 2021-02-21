@@ -1,13 +1,12 @@
 /* Header Start */
 h2.typing-txt{
   font-size: 30px;
-  font-family: "Nanum Gothic", sans-serif;
-  display: inline-block;
-  height: 30px; overflow: hidden;
+  font-family: "Nanum Gothic";
+  height: 35px; overflow: hidden;
   animation: typingAni 2s steps(30, end) 1;
 }
 h2.typing-txt::after{
-  position:absolute; 
+  position:relative; 
   display:block;
 }
 @keyframes typingAni {
@@ -29,7 +28,7 @@ h2.typing-txt::after{
 .left {
   left: 0;
   width: 15%;
-  background-color: rgb(227, 223, 247);
+  background-color: rgb(224, 224, 224);
 }
 
 /* Control the right side */
@@ -72,12 +71,12 @@ h2.typing-txt::after{
 .bold{
   font-weight:bold;
 }
-
 .listLine{
   stroke: blue;
   stroke-width: .01;
   fill:red;
 }
+
 html{
   position: relative;
   min-height: 100%;
