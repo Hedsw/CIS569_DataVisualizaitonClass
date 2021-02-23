@@ -16,7 +16,7 @@ h2.typing-txt::after{
 /* Header End */
 
 .split {
-  height: 90%;
+  height: 85%;
   position: absolute;
   z-index: 1;
   top: 1;
@@ -71,7 +71,7 @@ h2.typing-txt::after{
 .bold{
   font-weight:bold;
 }
-.listLine{
+.listArrow{
   stroke: blue;
   stroke-width: .01;
   fill:red;
