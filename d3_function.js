@@ -279,7 +279,31 @@ function displaySelectedFiles(){
             .enter()
             .append("div")
             .style("font", "14px 'Helvetica Neue'")
+            .style("height", '150px')
+            .style('overflow-y', 'scroll')
             .classed('detailDiv',true)
+            .on('click', function(event,d){
+                  let elem = d3.select(this);
+                  console.log(elem.style('height'))
+                  // if expanded then collapse and hide scroll
+                  if(elem.style('height') == '150px'){
+                        elem.style('overflow-y', 'hidden')
+                        elem.transition()
+                              .duration(200)
+                              .ease(d3.easeBounce)
+                              .style('height', '20px')
+                              
+                  }
+                  else{
+                        // expand div and add scroll
+                        elem.style('overflow-y', 'scroll')
+                        elem.transition()
+                              .duration(200)
+                              .ease(d3.easeBounce)
+                              .style('height', '150px')
+                              .style('overflow-y', 'scroll')
+                  }
+            })
       
       // add 'x' to close and deselect item
       detailDivs
@@ -287,6 +311,8 @@ function displaySelectedFiles(){
             .text(function(d){return 'X'})
             .style('color','red')
             .style('padding-bottom', '10px')
+            .style('width', '30px')
+            .style('display', 'inline-block')
             .on('click', function(event,d){
                   // find the item in the data array
                   let item = dataJSON[dataJSON.indexOf(d)];
@@ -302,6 +328,16 @@ function displaySelectedFiles(){
             .append('div')
             .text(function(d){return "File: " + d.name.split("/")[1]})
             .classed('bold',true)
+            .style('height', '150px')
+            .style('width', '150px')
+            .style('display', 'inline-block')
+            .transition()
+                  .duration(1000)
+                  .ease(d3.easeElastic)
+                  .delay(function(d,i){
+                        return i * 250;
+                  })
+            .style('height', '20px')
       
       detailDivs
             .append('div')
