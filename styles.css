@@ -16,7 +16,7 @@ h2.typing-txt::after{
 /* Header End */
 
 .split {
-  height: 90%;
+  height: 85%;
   position: absolute;
   z-index: 1;
   top: 1;
@@ -56,22 +56,21 @@ h2.typing-txt::after{
   text-align:left;
 }
 .detailDiv{
-  height:150px;
   width:80%;
   border: 1px solid black;
   border-radius: 5px;
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 10px;
+  padding-top:10px;
   margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
-  overflow-y: scroll;
 }
 .bold{
   font-weight:bold;
 }
-.listLine{
+.listArrow{
   stroke: blue;
   stroke-width: .01;
   fill:red;
