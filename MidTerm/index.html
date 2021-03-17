@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html lang="en">
+      <script src="https://d3js.org/d3.v4.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src= "d3_function.js"></script>
+      <head> 
+            <title> Data Visualization_CIS569_MidTerm </title> 
+            <meta charset="utf-8"> 
+            <link rel="stylesheet" type= "text/css" href="styles.css">
+      </head> 
+      <body> 
+            <section style="text-align: center;">
+                  <h2 class ="typing-txt">Data Visualization CIS569 _ MidTerm</h2>
+                  <h3  style="text-align: right; font-size: 15px;"> Member: Yunhhyeok Lee</h3>
+            </section>
+            
+      <h3> &emsp;&emsp; This is First Scatter Plot  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   This is Second Scatter Plot</h4>
+      <h4> &emsp;&emsp;&emsp; X-Axis and Y-Axis  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   X-Axis and Y-Axis</h4>
+      
+      <div id="scat1"></div>
+      
+      <h3> &emsp;&emsp; This is Third Scatter Plot </h3>
+      <h4> &emsp;&emsp;&emsp; X-Axis and Y-Axis</h4>
+      <div id="scat2"></div>
+      <div id="scat3"></div>
+
+
+      <!--   <div id='listDiv' class="split left" >
+                  <div id='listTitle'>Files:</div>
+                  <svg id='list'></svg>
+            </div>
+                
+            <div class="split right">
+                  <div id="detail"> </div>
+            </div>
+             <svg_test></svg_test>  
+            <div id='filename_id'>  </div>      
+      -->
+      <svg_test></svg_test>  
+
+           <!-- <div class="footer">Footer</div> -->
+      </body> 
+</html>
+
+<script>
+
+
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 30, bottom: 30, left: 60},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#scat2")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+//Read the data
+//d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", function(data) {
+d3.csv("cars_dataset.csv", function(data) {
+  // Add X axis
+  console.log(data)
+  var x = d3.scaleLinear()
+    .domain([0, 40]) // X Axis
+    .range([ 0, width ]);
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x));
+
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([0, 500]) // Y Axis
+    .range([ height, 0]);
+  svg.append("g")
+    .call(d3.axisLeft(y));
+  // Add dots
+  svg.append('g')
+    .selectAll("dot")
+    .data(data)
+    .enter()
+    .append("circle")
+      .attr("cx", function (d) { return x(d.MPG); } )
+      .attr("cy", function (d) { return y(d.Horsepower); })
+      .attr("r", 3)
+      .style("fill", "#69b3a2")
+});
+
+// 두번째
+
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 30, bottom: 30, left: 60},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg2 = d3.select("#scat1")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+//Read the data
+//d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", function(data) {
+d3.csv("cars_dataset.csv", function(data) {
+  // Add X axis
+  console.log(data)
+  var x = d3.scaleLinear()
+    .domain([0, 40]) // X Axis
+    .range([ 0, width ]);
+    svg2.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x));
+
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([0, 500]) // Y Axis
+    .range([ height, 0]);
+    svg2.append("g")
+    .call(d3.axisLeft(y));
+  // Add dots
+  svg2.append('g')
+    .selectAll("dot")
+    .data(data)
+    .enter()
+    .append("circle")
+      .attr("cx", function (d) { return x(d.MPG); } )
+      .attr("cy", function (d) { return y(d.Horsepower); })
+      .attr("r", 3)
+      .style("fill", "#69b3a2")
+});
+
+// 세번째
+
+var margin = {top: 10, right: 30, bottom: 30, left: 60},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg3 = d3.select("#scat1")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+//Read the data
+//d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", function(data) {
+d3.csv("cars_dataset.csv", function(data) {
+  // Add X axis
+  console.log(data)
+  var x = d3.scaleLinear()
+    .domain([0, 40]) // X Axis
+    .range([ 0, width ]);
+    svg3.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x));
+
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([0, 500]) // Y Axis
+    .range([ height, 0]);
+    svg3.append("g")
+    .call(d3.axisLeft(y));
+  // Add dots
+  svg3.append('g')
+    .selectAll("dot")
+    .data(data)
+    .enter()
+    .append("circle")
+      .attr("cx", function (d) { return x(d.MPG); } )
+      .attr("cy", function (d) { return y(d.Horsepower); })
+      .attr("r", 3)
+      .style("fill", "#69b3a2")
+});
+
+
+
+</script>
