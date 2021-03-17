@@ -15,14 +15,15 @@
                   <h3  style="text-align: right; font-size: 15px;"> Member: Yunhhyeok Lee</h3>
             </section>
             
-      <h3> &emsp;&emsp; This is First Scatter Plot  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   This is Second Scatter Plot</h4>
-      <h4> &emsp;&emsp;&emsp; X-Axis and Y-Axis  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;   X-Axis and Y-Axis</h4>
+      <h3> &emsp;&emsp; This is First Scatter Plot </h4>
+      <h4> &emsp;&emsp;&emsp; X-Axis -> Cylinders and Y-Axis -> Weight </h4>
       
       <div id="scat1"></div>
-      
-      <h3> &emsp;&emsp; This is Third Scatter Plot </h3>
-      <h4> &emsp;&emsp;&emsp; X-Axis and Y-Axis</h4>
+      <h3> &emsp;&emsp; This is Second Scatter Plot </h3>
+      <h4> &emsp;&emsp;&emsp; X-Axis -> Cylinders  and Y-Axis -> MPG </h4>
       <div id="scat2"></div>
+      <h3> &emsp;&emsp; This is Third Scatter Plot </h3>
+      <h4> &emsp;&emsp;&emsp; X-Axis -> Cylinders and Y-Axis -> Horsepower </h4>
       <div id="scat3"></div>
 
 
@@ -44,15 +45,13 @@
 </html>
 
 <script>
-
-
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#scat2")
+var svg = d3.select("#scat1")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -66,7 +65,7 @@ d3.csv("cars_dataset.csv", function(data) {
   // Add X axis
   console.log(data)
   var x = d3.scaleLinear()
-    .domain([0, 40]) // X Axis
+    .domain([0, 10]) // X Axis
     .range([ 0, width ]);
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -74,7 +73,7 @@ d3.csv("cars_dataset.csv", function(data) {
 
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([0, 500]) // Y Axis
+    .domain([0, 6000]) // Y Axis
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
@@ -84,21 +83,20 @@ d3.csv("cars_dataset.csv", function(data) {
     .data(data)
     .enter()
     .append("circle")
-      .attr("cx", function (d) { return x(d.MPG); } )
-      .attr("cy", function (d) { return y(d.Horsepower); })
+      .attr("cx", function (d) { return x(d.Cylinders); } )
+      .attr("cy", function (d) { return y(d.Weight); })
       .attr("r", 3)
       .style("fill", "#69b3a2")
 });
 
 // 두번째
-
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg2 = d3.select("#scat1")
+var svg2 = d3.select("#scat2")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -112,7 +110,7 @@ d3.csv("cars_dataset.csv", function(data) {
   // Add X axis
   console.log(data)
   var x = d3.scaleLinear()
-    .domain([0, 40]) // X Axis
+    .domain([0, 10]) // X Axis
     .range([ 0, width ]);
     svg2.append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -120,7 +118,7 @@ d3.csv("cars_dataset.csv", function(data) {
 
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([0, 500]) // Y Axis
+    .domain([0, 50]) // Y Axis
     .range([ height, 0]);
     svg2.append("g")
     .call(d3.axisLeft(y));
@@ -130,8 +128,8 @@ d3.csv("cars_dataset.csv", function(data) {
     .data(data)
     .enter()
     .append("circle")
-      .attr("cx", function (d) { return x(d.MPG); } )
-      .attr("cy", function (d) { return y(d.Horsepower); })
+      .attr("cx", function (d) { return x(d.Cylinders); } )
+      .attr("cy", function (d) { return y(d.MPG); })
       .attr("r", 3)
       .style("fill", "#69b3a2")
 });
@@ -143,7 +141,7 @@ var margin = {top: 10, right: 30, bottom: 30, left: 60},
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg3 = d3.select("#scat1")
+var svg3 = d3.select("#scat3")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -157,7 +155,7 @@ d3.csv("cars_dataset.csv", function(data) {
   // Add X axis
   console.log(data)
   var x = d3.scaleLinear()
-    .domain([0, 40]) // X Axis
+    .domain([0, 10]) // X Axis
     .range([ 0, width ]);
     svg3.append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -175,12 +173,9 @@ d3.csv("cars_dataset.csv", function(data) {
     .data(data)
     .enter()
     .append("circle")
-      .attr("cx", function (d) { return x(d.MPG); } )
+      .attr("cx", function (d) { return x(d.Cylinders); } )
       .attr("cy", function (d) { return y(d.Horsepower); })
       .attr("r", 3)
       .style("fill", "#69b3a2")
 });
-
-
-
 </script>
