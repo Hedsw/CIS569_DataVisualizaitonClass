@@ -85,7 +85,8 @@ var div = d3.select("body").append("div")
       .data(data)
       .enter().append("circle").attr("r", 5)
             .attr("cx", function (d) { return x(d.Cylinders); })
-            .attr("cy", function (d) { return y(d.Weight); })
+            .attr("cy", function (d) { 
+              if (d.Weight > 1500) return y(d.Weight); })
             .attr("r", 3)
             .style("fill", function (d) { return color(d.Cylinders) } )
 
@@ -156,8 +157,10 @@ var div = d3.select("body").append("div")
   var path = svg2.selectAll("dot")
       .data(data)
       .enter().append("circle").attr("r", 5)
-            .attr("cx", function (d) { return x(d.Cylinders); })
-            .attr("cy", function (d) { return y(d.MPG); })
+            .attr("cx", function (d) { 
+              return x(d.Cylinders); })
+            .attr("cy", function (d) {
+              if (d.MPG < 60) return y(d.MPG); })
             .attr("r", 3)
             .style("fill", function (d) { return color2(d.Cylinders) } )
             .on('mouseover', function (d, i) {
@@ -225,7 +228,8 @@ var div = d3.select("body").append("div")
       .data(data)
       .enter().append("circle").attr("r", 5)
             .attr("cx", function (d) { return x(d.Cylinders); })
-            .attr("cy", function (d) { return y(d.Horsepower); })
+            .attr("cy", function (d) {  
+              if(d.Horsepower < 240) return (d.Horsepower); })
             .attr("r", 3)
             .style("fill", function (d) { return color3(d.Cylinders) } )
             .on('mouseover', function (d, i) {
@@ -249,6 +253,5 @@ var div = d3.select("body").append("div")
       });
       
 });
-
 
 </script>
